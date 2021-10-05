@@ -4,10 +4,36 @@
 #include "../mergesort/mergesort.c"
 #include "../mergesort/mergesort.h"
 
+int* removeDuplicates(int size, int* sortedValues)
+{
+  int counter = 0;
+  int* noDuplicates;
+  int* final;
+  noDuplicates = (int*)calloc(size, sizeof(int));
+  noDuplicates[0] = sortedValues[0];
+  int j = 1;
+  for(int i = 1; i < size; i++){
+    if(sortedValues[i] != noDuplicates[j-1])
+      {
+        noDuplicates[j] = sortedValues[i];
+        counter++;
+        j++;
+      }
+  }
+  final = (int*)calloc(counter+1, sizeof(int));
+  final[0] = counter+1;
+  for(int i = 1; i <= counter + 1; i++)
+  {
+      final[i] = noDuplicates[i-1];
+  }
+  free(noDuplicates);
+  return final;
+}
+
 int* array_merge(int num_arrays, int* sizes, int** values) {
   int k, counter;
   int* intermediate;
-  int* result;
+  int* final;
   for(int i = 0; i<num_arrays; i++)
   {
     k = k + sizes[i];
@@ -26,13 +52,8 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
   }
   mergesort(k, intermediate);
 
-  result = (int*)calloc(k+1, sizeof(int));
-  result[0] = k;
-  for(int j = 0; j < k; j++)
-  {
-    result[j+1] = intermediate[j];
-  }
-
+  final = removeDuplicates(k, intermediate);
+  
   free(intermediate);
-  return result;
+  return final;
 }
