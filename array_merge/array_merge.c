@@ -33,7 +33,15 @@ int* removeDuplicates(int size, int* sortedValues)
 int* array_merge(int num_arrays, int* sizes, int** values) {
   int k, counter;
   int* intermediate;
+  int* empty;
   int* final;
+  empty = (int*)calloc(1, sizeof(int));
+  empty[0] = 0;
+  if(num_arrays == 0){
+    return empty;
+    }
+  else
+  {
   for(int i = 0; i<num_arrays; i++)
   {
     k = k + sizes[i];
@@ -56,4 +64,5 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
   
   free(intermediate);
   return final;
+  }
 }
