@@ -25,7 +25,7 @@ int* removeDuplicates(int size, int* sortedValues)
   n = counter + 1;
   final = (int*)calloc(len, sizeof(int));
   final[0] = n;
-  for(int i = 1; i <= len; i++)
+  for(int i = 1; i < len; i++)  // changed i <= len to i < len, were getting a invalid write of size 4 error.
   {
       final[i] = noDuplicates[i-1];
   }
@@ -45,7 +45,7 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
     }
   else
   {
-    k = 0; 
+    k = 0; // was uninitialized.  thanks C
   for(int i = 0; i<num_arrays; i++)
   {
     k = k + sizes[i];
