@@ -6,12 +6,13 @@
 
 int* removeDuplicates(int size, int* sortedValues)
 {
-  int counter = 0;
+  int counter, j, len, n;
   int* noDuplicates;
   int* final;
   noDuplicates = (int*)calloc(size, sizeof(int));
   noDuplicates[0] = sortedValues[0];
-  int j = 1;
+  counter = 0;
+  j = 1;
   for(int i = 1; i < size; i++){
     if(sortedValues[i] != noDuplicates[j-1])
       {
@@ -20,8 +21,8 @@ int* removeDuplicates(int size, int* sortedValues)
         j++;
       }
   }
-  int len = counter + 2;
-  int n = counter + 1;
+  len = counter + 2;
+  n = counter + 1;
   final = (int*)calloc(len, sizeof(int));
   final[0] = n;
   for(int i = 1; i <= len; i++)
@@ -44,6 +45,7 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
     }
   else
   {
+    k = 0; 
   for(int i = 0; i<num_arrays; i++)
   {
     k = k + sizes[i];
